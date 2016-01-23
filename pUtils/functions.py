@@ -5,6 +5,7 @@ import re
 seriesMatches = []
 moviesMatches = []
 
+
 # noinspection PyPep8Naming
 class Utils:
     def __init__(self, seriesmatches, moviesmatches):

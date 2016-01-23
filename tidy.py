@@ -1,6 +1,7 @@
 import pUtils
 import os
 import sys
+import shutil
 
 # Options
 videoExt = ['.avi', '.mp4', '.mkv', '.srt']
@@ -14,6 +15,7 @@ avoid = ['sample.avi']
 
 logs = True
 moveFiles = True
+deleteOldPath = True
 
 # End Options
 
@@ -71,9 +73,14 @@ def magicToFiles(currentPath, globalPath, fileObject):
                 if logs:
                     print 'Moving ' + fileObject.getName() + ' to ' + newPath
                 if moveFiles:
+                    # Check if the move command returns smth
                     utils.move(oldPath, newPath)
 
         fileObject = None
+
+    # remove old path if everything went allright
+    if deleteOldPath and currentPath != globalPath:
+        shutil.rmtree(currentPath)
 
 
 # noinspection PyPep8Naming
@@ -101,7 +108,7 @@ class FileObject:
         self.name = name
 
         if showName:
-            self.showName=showName
+            self.showName = showName
 
     def getVideoKind(self):
         return self.videoKind
@@ -110,7 +117,7 @@ class FileObject:
         return self.name
 
     def setShowName(self, showName):
-        self.showName=showName
+        self.showName = showName
 
     def getShowName(self):
         return self.showName
